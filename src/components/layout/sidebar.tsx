@@ -41,26 +41,34 @@ const DEFAULT_SECTIONS: Section[] = [
 
 export function Sidebar({ chapters }: SidebarProps) {
   // derive initial from localStorage or active chapter
-  const initial = (() => {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let nextExpanded: string | null = null;
     try {
       const raw = window.localStorage.getItem("conceptverse-sidebar-expanded");
-      if (raw) return raw;
+      if (raw) nextExpanded = raw;
     } catch {
       /* ignore */
     }
 
-    const active = chapters.find((c) => c.isActive);
-    if (active) {
-      const parent = DEFAULT_SECTIONS.find((s) => s.children?.some((ch) => ch.id === active.id));
-      if (parent) return parent.id;
+    if (!nextExpanded) {
+      const active = chapters.find((c) => c.isActive);
+      if (active) {
+        const parent = DEFAULT_SECTIONS.find((s) => s.children?.some((ch) => ch.id === active.id));
+        if (parent) nextExpanded = parent.id;
+      }
     }
 
-    return null;
-  })();
-
-  const [expanded, setExpanded] = useState<string | null>(initial);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setExpanded(nextExpanded);
+  }, [chapters]);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     try {
       if (expanded) window.localStorage.setItem("conceptverse-sidebar-expanded", expanded);
       else window.localStorage.removeItem("conceptverse-sidebar-expanded");

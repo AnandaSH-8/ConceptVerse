@@ -7,17 +7,19 @@ export type ThemeMode = "dark" | "light";
 const STORAGE_KEY = "conceptverse-theme";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<ThemeMode>(() => {
-    if (typeof window === "undefined") {
-      return "dark";
-    }
+  const [theme, setTheme] = useState<ThemeMode>("dark");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
     const savedTheme = window.localStorage.getItem(STORAGE_KEY) as ThemeMode | null;
-    return (
+    const preferredTheme =
       savedTheme ??
-      (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark")
-    );
-  });
+      (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTheme(preferredTheme);
+  }, []);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
