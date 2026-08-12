@@ -17,7 +17,7 @@ import { useTheme } from "@/hooks/use-theme";
 export default function Home() {
   const { theme, toggleTheme } = useTheme();
   const [isPlaying, setIsPlaying] = useState(true);
-  const [autoRotate, setAutoRotate] = useState(true);
+  const [autoRotate, setAutoRotate] = useState(false);
   const [sceneKey, setSceneKey] = useState(0);
   const [resetCameraKey, setResetCameraKey] = useState(0);
 

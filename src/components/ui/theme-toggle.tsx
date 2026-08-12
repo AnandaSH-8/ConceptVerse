@@ -15,11 +15,11 @@ export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
       type="button"
       onClick={onToggle}
       aria-label="Toggle light and dark theme"
-      className="group relative inline-flex h-11 w-20 items-center rounded-full border border-[var(--border)] bg-[var(--panel-soft)] p-1 shadow-[0_10px_30px_rgba(15,23,42,0.12)] transition-all duration-300 hover:border-[var(--brand)]/60"
+      className="group relative inline-flex h-11 w-20 items-center overflow-hidden rounded-full border border-[var(--border)] bg-[var(--panel-soft)] p-1 shadow-[0_10px_30px_rgba(15,23,42,0.12)] transition-all duration-300 hover:border-[var(--brand)]/60"
     >
       <span
-        className={`absolute inset-1 flex items-center justify-center rounded-full transition-all duration-300 ${
-          isDark ? "translate-x-9 bg-[var(--panel-elevated)]" : "translate-x-0 bg-[var(--panel-elevated)]"
+        className={`absolute left-1 top-1 h-9 w-9 rounded-full bg-[var(--panel-elevated)] shadow-[0_6px_16px_rgba(15,23,42,0.12)] transition-transform duration-300 ${
+          isDark ? "translate-x-9" : "translate-x-0"
         }`}
       />
       <span className="relative z-10 flex w-full items-center justify-between px-2 text-[var(--text-soft)]">

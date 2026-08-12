@@ -20,10 +20,10 @@ export function SceneControls({
   onToggleAutoRotate,
 }: SceneControlsProps) {
   const buttonClass =
-    "inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel-soft)] px-3 py-2 text-sm font-medium text-[var(--text)] transition hover:border-[var(--brand)]/50 hover:text-[var(--brand)]";
+    "inline-flex items-center justify-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--panel-soft)] px-2.5 py-1.5 text-xs font-semibold text-[var(--text)] transition hover:border-[var(--brand)]/50 hover:text-[var(--brand)]";
 
   return (
-    <div className="mt-4 flex flex-wrap items-center gap-3 rounded-full border border-[var(--border)] bg-[var(--panel-strong)] p-2 shadow-[0_10px_25px_rgba(15,23,42,0.12)]">
+    <div className="mt-4 flex flex-wrap items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel-strong)] p-1.5 shadow-[0_8px_20px_rgba(15,23,42,0.12)]">
       <button type="button" onClick={onTogglePlay} className={buttonClass}>
         {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
         {isPlaying ? "Pause" : "Play"}
